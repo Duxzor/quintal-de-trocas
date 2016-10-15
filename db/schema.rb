@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160917105317) do
+ActiveRecord::Schema.define(version: 20161013225501) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -99,11 +99,14 @@ ActiveRecord::Schema.define(version: 20160917105317) do
     t.datetime "finalized_at"
     t.boolean  "accepted"
     t.integer  "user_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
     t.string   "reason"
     t.boolean  "credit_offer"
     t.integer  "user_to"
+    t.datetime "user_from_received"
+    t.datetime "user_to_received"
+    t.datetime "deleted_at"
   end
 
   add_index "exchanges", ["user_id"], name: "index_exchanges_on_user_id"
@@ -160,6 +163,19 @@ ActiveRecord::Schema.define(version: 20160917105317) do
 
   add_index "mailboxer_receipts", ["notification_id"], name: "index_mailboxer_receipts_on_notification_id"
   add_index "mailboxer_receipts", ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
+
+  create_table "orders", force: :cascade do |t|
+    t.string   "code"
+    t.string   "title"
+    t.string   "price"
+    t.string   "status"
+    t.integer  "user_id"
+    t.integer  "toy_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "orders", ["user_id"], name: "index_orders_on_user_id"
 
   create_table "places", force: :cascade do |t|
     t.string   "title"

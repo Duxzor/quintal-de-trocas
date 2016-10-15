@@ -765,3 +765,34 @@ footer {
     }
   }
 }
+
+.donation-bar {
+  .buttons {
+    padding: 5px 0 10px 0;
+  }
+}
+
+
+#card_number {
+  &.visa-icon {
+    background: transparent url('https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/42x20/visa.png') no-repeat right center;
+  }
+  
+  &.mastercard-icon {
+    background: transparent url('https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/42x20/mastercard.png') no-repeat right center;
+  }
+}
+
+
+/* Override BT */
+.btn-success {
+  text-transform: uppercase;
+  background-color: $green;
+  border: 0;
+  padding: 13px 20px;
+
+  &:hover {
+    background-color: lighten($green, 10%)
+  }
+}
+>>>>>>> Stashed changes
