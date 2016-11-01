@@ -1,4 +1,4 @@
-class ItemsController < ApplicationController
+class ProductsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy, :exchange, :activate]
   before_action :authenticate_user!, except: [:index, :show, :index_near, :exchange, :activate]
 
@@ -8,7 +8,7 @@ class ItemsController < ApplicationController
   def index
     @bs_container = false
 
-    @q = Item.for_exc.includes(:item_category, :item_age, :item_images)
+    @q = Item.for_buy.includes(:item_category, :item_age, :item_images)
 
     location = if !params[:lat].blank? && !params[:lon].blank?
       [params[:lat], params[:lon]].join(",")
@@ -190,11 +190,11 @@ class ItemsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_item
-      @item = Item.find(params[:id])
+      @item = ItemImage.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
-      params.require(:item).permit(:title, :price, :description, :item_age_id, :item_category_id, :user_id, :tag_list, :zipcode, :latitude, :longitude, item_images_attributes: [:id, :item_id, :image, :featured])
+      params.require(:item).permit(:title, :description, :item_age_id, :item_category_id, :user_id, :tag_list, :zipcode, :latitude, :longitude, item_images_attributes: [:id, :item_id, :image, :featured])
     end
 end

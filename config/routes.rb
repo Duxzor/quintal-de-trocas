@@ -35,6 +35,8 @@ Rails.application.routes.draw do
     resources :places, path: 'pontos'
     get 'meus-pontos' => 'places#my_places', as: :my_places
 
+    resources :products, path: 'produtos'
+    
     resources :items, path: 'brinquedos' do
       get 'index_near', on: :collection
       get 'exchange', on: :member

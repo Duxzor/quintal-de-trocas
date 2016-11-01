@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031222021) do
+ActiveRecord::Schema.define(version: 20161101102751) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -142,15 +142,16 @@ ActiveRecord::Schema.define(version: 20161031222021) do
     t.string   "zipcode"
     t.float    "latitude"
     t.float    "longitude"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
     t.string   "image"
     t.boolean  "is_active"
     t.datetime "deleted_at"
     t.string   "neighborhood"
     t.date     "next_notification_at"
     t.datetime "expired_at"
-    t.integer  "activate_qty",         default: 0
+    t.integer  "activate_qty",                                 default: 0
+    t.decimal  "price",                precision: 8, scale: 2
   end
 
   add_index "items", ["item_age_id"], name: "index_items_on_item_age_id"

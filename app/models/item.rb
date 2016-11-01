@@ -3,6 +3,9 @@ class Item < ActiveRecord::Base
   acts_as_taggable
   acts_as_paranoid
 
+  scope :for_exc, -> { where("price IS NULL") }
+  scope :for_buy, -> { where("price IS NOT NULL") }
+
   belongs_to :item_category
   belongs_to :item_age
   belongs_to :user
