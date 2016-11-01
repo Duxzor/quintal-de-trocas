@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'toys#index'
+  root 'items#index'
 
   scope(path_names: { new: 'novo', edit: 'alterar' }) do
 
@@ -35,17 +35,17 @@ Rails.application.routes.draw do
     resources :places, path: 'pontos'
     get 'meus-pontos' => 'places#my_places', as: :my_places
 
-    resources :toys, path: 'brinquedos' do
+    resources :items, path: 'brinquedos' do
       get 'index_near', on: :collection
       get 'exchange', on: :member
       get 'activate', on: :member
     end
 
-    get 'meus-brinquedos' => 'toys#my_toys', as: :my_toys
+    get 'meus-brinquedos' => 'items#my_items', as: :my_items
 
-    resources :toy_ages, path: 'faixa-etaria'
-    resources :toy_categories, path: 'categorias'
-    resources :toy_images, path: 'imagens'
+    resources :item_ages, path: 'faixa-etaria'
+    resources :item_categories, path: 'categorias'
+    resources :item_images, path: 'imagens'
 
     resources :conversations, only: [:index, :show, :new, :create] do
       member do
@@ -82,7 +82,7 @@ Rails.application.routes.draw do
   # 301 redirects
   
   get('/produtos/detalhe/:id', to: redirect do |params, request|
-    Rails.application.routes.url_helpers.toy_path(params[:id])
+    Rails.application.routes.url_helpers.item_path(params[:id])
   end)
 
   get('/colunas_novidades/detalhe/:id', to: redirect do |params, request|

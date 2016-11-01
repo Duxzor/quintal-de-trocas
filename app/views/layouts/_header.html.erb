@@ -1,4 +1,4 @@
-<header class="<%= 'no-margin' if content_for?(:subheader) || (params[:controller] == "toys" && params[:action] == "index") || current_page?(root_url) %>">
+<header class="<%= 'no-margin' if content_for?(:subheader) || (params[:controller] == "items" && params[:action] == "index") || current_page?(root_url) %>">
   <nav class="navbar navbar-quintal">
     <div class="container">
       <!-- Brand and toggle get grouped for better mobile display -->
@@ -23,7 +23,7 @@
               <li><%= link_to 'Na Mídia', media_path %></li>
             </ul>
           </li>
-          <li><%= link_to 'Quero Trocar', toys_path %></li>
+          <li><%= link_to 'Quero Trocar', items_path %></li>
           <li><%= link_to "Como funciona", how_it_works_path %></li>
           <li><%= link_to 'Apoie', support_path %></li>
 
@@ -47,7 +47,7 @@
                 <% end %>
                 <li><%= link_to "Meu perfil", user_path(current_user) %></li>
                 <li><%= link_to "Alterar dados pessoais", edit_user_registration_path %></li>
-                <li><%= link_to "Meus brinquedos", my_toys_path %></li>
+                <li><%= link_to "Meus brinquedos", my_items_path %></li>
                 <li><%= link_to "Minhas trocas (#{current_user.exchanges_received.waiting.count})", my_exchanges_path %></li>
                 <li><%= link_to "Meus créditos", my_credits_path %></li>
                 <li><%= link_to "Minhas compras", my_orders_path %></li>
@@ -85,7 +85,7 @@
 </header>
 
 <% if current_user && !User.find(current_user.id).valid? %>
-  <% if params[:controller] == "toys" && params[:action] == "index" %>
+  <% if params[:controller] == "items" && params[:action] == "index" %>
   <% else %>
     <div class="container">
       <div class="alert alert-danger">Olá, seu cadastrado não está completo. <%= link_to "Complete seu cadastro", edit_user_registration_path, class: "btn btn-default btn-sm" %> para poder aproveitar todos benefícios do Quintal :)</div>

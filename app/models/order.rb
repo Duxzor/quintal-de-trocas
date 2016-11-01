@@ -1,6 +1,6 @@
 class Order < ActiveRecord::Base
   belongs_to :user
-  belongs_to :toy
+  belongs_to :item
   # attr_accessible :code, :price, :title, :status
 
   before_save :normalize_status

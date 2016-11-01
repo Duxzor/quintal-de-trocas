@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161031165929) do
+ActiveRecord::Schema.define(version: 20161031222021) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -66,12 +66,12 @@ ActiveRecord::Schema.define(version: 20161031165929) do
     t.integer  "exchange_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
-    t.integer  "toy_id"
+    t.integer  "item_id"
     t.integer  "used_in_exchange_id"
   end
 
   add_index "credits", ["exchange_id"], name: "index_credits_on_exchange_id"
-  add_index "credits", ["toy_id"], name: "index_credits_on_toy_id"
+  add_index "credits", ["item_id"], name: "index_credits_on_item_id"
   add_index "credits", ["user_id"], name: "index_credits_on_user_id"
 
   create_table "exchange_messages", force: :cascade do |t|
@@ -89,8 +89,8 @@ ActiveRecord::Schema.define(version: 20161031165929) do
   add_index "exchange_messages", ["user_id"], name: "index_exchange_messages_on_user_id"
 
   create_table "exchanges", force: :cascade do |t|
-    t.integer  "toy_from"
-    t.integer  "toy_to"
+    t.integer  "item_from"
+    t.integer  "item_to"
     t.string   "exchange_type"
     t.string   "exchange_deliver"
     t.integer  "rating_from"
@@ -110,6 +110,52 @@ ActiveRecord::Schema.define(version: 20161031165929) do
   end
 
   add_index "exchanges", ["user_id"], name: "index_exchanges_on_user_id"
+
+  create_table "item_ages", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "item_categories", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "item_images", force: :cascade do |t|
+    t.integer  "item_id"
+    t.string   "image"
+    t.boolean  "featured",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "item_images", ["item_id"], name: "index_item_images_on_item_id"
+
+  create_table "items", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "item_category_id"
+    t.integer  "item_age_id"
+    t.integer  "user_id"
+    t.string   "zipcode"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "image"
+    t.boolean  "is_active"
+    t.datetime "deleted_at"
+    t.string   "neighborhood"
+    t.date     "next_notification_at"
+    t.datetime "expired_at"
+    t.integer  "activate_qty",         default: 0
+  end
+
+  add_index "items", ["item_age_id"], name: "index_items_on_item_age_id"
+  add_index "items", ["item_category_id"], name: "index_items_on_item_category_id"
+  add_index "items", ["user_id"], name: "index_items_on_user_id"
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
     t.integer "unsubscriber_id"
@@ -170,7 +216,7 @@ ActiveRecord::Schema.define(version: 20161031165929) do
     t.string   "price"
     t.string   "status"
     t.integer  "user_id"
-    t.integer  "toy_id"
+    t.integer  "item_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -218,52 +264,6 @@ ActiveRecord::Schema.define(version: 20161031165929) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true
-
-  create_table "toy_ages", force: :cascade do |t|
-    t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "toy_categories", force: :cascade do |t|
-    t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "toy_images", force: :cascade do |t|
-    t.integer  "toy_id"
-    t.string   "image"
-    t.boolean  "featured",   default: false
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
-  add_index "toy_images", ["toy_id"], name: "index_toy_images_on_toy_id"
-
-  create_table "toys", force: :cascade do |t|
-    t.string   "title"
-    t.text     "description"
-    t.integer  "toy_category_id"
-    t.integer  "toy_age_id"
-    t.integer  "user_id"
-    t.string   "zipcode"
-    t.float    "latitude"
-    t.float    "longitude"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-    t.string   "image"
-    t.boolean  "is_active"
-    t.datetime "deleted_at"
-    t.string   "neighborhood"
-    t.date     "next_notification_at"
-    t.datetime "expired_at"
-    t.integer  "activate_qty",         default: 0
-  end
-
-  add_index "toys", ["toy_age_id"], name: "index_toys_on_toy_age_id"
-  add_index "toys", ["toy_category_id"], name: "index_toys_on_toy_category_id"
-  add_index "toys", ["user_id"], name: "index_toys_on_user_id"
 
   create_table "user_children", force: :cascade do |t|
     t.string  "name"

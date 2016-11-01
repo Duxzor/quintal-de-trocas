@@ -69,8 +69,8 @@ class OrdersController < ApplicationController
   # GET /orders/new.json
   def new
     @order = current_user.orders.new
-    @order.toy_id =  params[:product]
-    @toy = @order.toy
+    @order.item_id =  params[:product]
+    @item = @order.item
 
     # 1. Get Pagseguro valid session
     session = PagSeguro::Session.create
@@ -92,7 +92,7 @@ class OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = Order.new(params[:order])
-    @toy = @order.toy
+    @item = @order.item
 
     # Fields to add to user model
     # 1.1 price
@@ -114,21 +114,21 @@ class OrdersController < ApplicationController
       payment = PagSeguro::CreditCardTransactionRequest.new
       payment.notification_url = notification_url
       payment.payment_mode = "gateway"
-      payment.reference = "REF#{@order.id}-#{@toy.id}-credit-card"
+      payment.reference = "REF#{@order.id}-#{@item.id}-credit-card"
 
     elsif params[:paymentMethod] == "boleto"
 
       payment = PagSeguro::BoletoTransactionRequest.new
       payment.notification_url = notification_url
       payment.payment_mode = "default"
-      payment.reference = "REF#{@order.id}-#{@toy.id}-boleto"
+      payment.reference = "REF#{@order.id}-#{@item.id}-boleto"
     end
 
     # Set items
     payment.items << {
       id: @order.id,
-      description: @toy.title,
-      amount: (@toy.price || 50.00),
+      description: @item.title,
+      amount: (@item.price || 50.00),
       weight: 1
     }
 

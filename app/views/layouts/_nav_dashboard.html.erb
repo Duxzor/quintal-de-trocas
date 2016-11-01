@@ -3,7 +3,7 @@
   <div class="list-group dashboard">
     <%= link_to "<span class='glyphicon glyphicon-user'></span> Alterar dados pessoais".html_safe, edit_user_registration_path, class: (params[:controller] == "registrations" ? "list-group-item active" : "list-group-item") %>
 
-    <%= link_to "<span class='glyphicon glyphicon-list'></span> Meus brinquedos".html_safe, my_toys_path, class: (params[:controller] == "toys" ? "list-group-item active" : "list-group-item") %>
+    <%= link_to "<span class='glyphicon glyphicon-list'></span> Meus brinquedos".html_safe, my_items_path, class: (params[:controller] == "items" ? "list-group-item active" : "list-group-item") %>
 
     <%= link_to "<span class='glyphicon glyphicon-transfer'></span> Minhas trocas".html_safe, my_exchanges_path, class: (params[:controller] == "exchanges" ? "list-group-item active" : "list-group-item") %>
 

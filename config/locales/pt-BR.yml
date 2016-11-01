@@ -3,7 +3,7 @@ pt-BR:
   simple_form:
     labels:
       exchange:
-        toy_to: "Brinquedo que você quer trocar"
+        item_to: "Brinquedo que você quer trocar"
       user:
         email: Email
         password: Senha
@@ -23,12 +23,12 @@ pt-BR:
         name: Nome
         birthday: Data nasc.
         gender: Sexo
-      toy:
+      item:
         title: Título
         description: Descrição
         tag_list: Palavras chave
-        toy_age_id: Faixa etária
-        toy_category_id: Categoria
+        item_age_id: Faixa etária
+        item_category_id: Categoria
       contact:
         name: Nome completo
         email: Email
