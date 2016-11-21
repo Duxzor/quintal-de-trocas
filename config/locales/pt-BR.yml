@@ -4,6 +4,8 @@ pt-BR:
     labels:
       exchange:
         item_to: "Brinquedo que você quer trocar"
+      store:
+        name: "Nome da sua loja"
       user:
         email: Email
         password: Senha
@@ -29,6 +31,10 @@ pt-BR:
         tag_list: Palavras chave
         item_age_id: Faixa etária
         item_category_id: Categoria
+        weight: Peso
+        width: Largura
+        height: Altura
+        length: Comprimento
       contact:
         name: Nome completo
         email: Email

@@ -54,6 +54,7 @@ gem 'newrelic_rpm'
 gem 'carrierwave-base64'
 gem 'whenever', :require => false
 gem "pagseguro-oficial", "~> 2.5.0"
+gem 'correios-frete'
 
 gem 'puma'
 

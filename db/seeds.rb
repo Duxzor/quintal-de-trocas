@@ -6,13 +6,13 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-AdminUser.destroy_all
-AdminUser.create!(email: 'admin@example.com', password: 'admin123', password_confirmation: 'admin123')
+# AdminUser.destroy_all
+# AdminUser.create!(email: 'admin@example.com', password: 'admin123', password_confirmation: 'admin123')
 
 
 # create users
 User.destroy_all
-User.create email: "netto16@gmail.com", password: "admin123", name: "Osny", birthday: 1989, gender: "M", phone: "48 99355794", username: "osnysantos", zipcode: "88110690", street: "Rua Bernardo Halfeld, 471", city: "São José", state: "SC", latitude: -27.5807659, longitude: -48.6194795
+User.create email: "netto16@gmail.com", admin: true, password: "admin123", name: "Osny", birthday: 1989, gender: "M", phone: "48 99355794", username: "osnysantos", zipcode: "88110690", street: "Rua Bernardo Halfeld, 471", city: "São José", state: "SC", latitude: -27.5807659, longitude: -48.6194795
 User.create email: "test@test.com", password: "admin123", name: "Joao", birthday: 2000, gender: "M", phone: "48 788728787", username: "joao", zipcode: "88111120"
 
 

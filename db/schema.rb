@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101102751) do
+ActiveRecord::Schema.define(version: 20161118112721) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string   "namespace"
@@ -152,6 +152,11 @@ ActiveRecord::Schema.define(version: 20161101102751) do
     t.datetime "expired_at"
     t.integer  "activate_qty",                                 default: 0
     t.decimal  "price",                precision: 8, scale: 2
+    t.integer  "weight"
+    t.integer  "width"
+    t.integer  "height"
+    t.integer  "length"
+    t.integer  "stock"
   end
 
   add_index "items", ["item_age_id"], name: "index_items_on_item_age_id"
@@ -246,6 +251,15 @@ ActiveRecord::Schema.define(version: 20161101102751) do
 
   add_index "places", ["user_id"], name: "index_places_on_user_id"
 
+  create_table "stores", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "stores", ["user_id"], name: "index_stores_on_user_id"
+
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
     t.integer  "taggable_id"
@@ -265,6 +279,52 @@ ActiveRecord::Schema.define(version: 20161101102751) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true
+
+  create_table "toy_ages", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "toy_categories", force: :cascade do |t|
+    t.string   "title"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "toy_images", force: :cascade do |t|
+    t.integer  "toy_id"
+    t.string   "image"
+    t.boolean  "featured",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
+  add_index "toy_images", ["toy_id"], name: "index_toy_images_on_toy_id"
+
+  create_table "toys", force: :cascade do |t|
+    t.string   "title"
+    t.text     "description"
+    t.integer  "toy_category_id"
+    t.integer  "toy_age_id"
+    t.integer  "user_id"
+    t.string   "zipcode"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "image"
+    t.boolean  "is_active"
+    t.datetime "deleted_at"
+    t.string   "neighborhood"
+    t.date     "next_notification_at"
+    t.datetime "expired_at"
+    t.integer  "activate_qty",         default: 0
+  end
+
+  add_index "toys", ["toy_age_id"], name: "index_toys_on_toy_age_id"
+  add_index "toys", ["toy_category_id"], name: "index_toys_on_toy_category_id"
+  add_index "toys", ["user_id"], name: "index_toys_on_user_id"
 
   create_table "user_children", force: :cascade do |t|
     t.string  "name"
@@ -305,8 +365,13 @@ ActiveRecord::Schema.define(version: 20161101102751) do
     t.string   "neighborhood"
     t.boolean  "newsletter"
     t.boolean  "admin",                  default: false
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
   end
 
+  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
