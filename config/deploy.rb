@@ -3,7 +3,7 @@ lock '3.6.0'
 set :application, 'quintal'
 set :repo_url, 'git@github.com:Duxzor/quintal-de-trocas'
 set :branch, :master
-set :deploy_to, '/home/deploy/quintal'
+set :deploy_to, '/home/ubuntu/quintal'
 set :pty, true
 set :linked_files, %w{config/database.yml config/application.yml public/robots.txt}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system public/uploads}
