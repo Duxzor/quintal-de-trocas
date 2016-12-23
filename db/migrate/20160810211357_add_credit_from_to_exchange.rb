@@ -3,7 +3,7 @@ class AddCreditFromToExchange < ActiveRecord::Migration
   def up
     add_column :exchanges, :credit_offer, :boolean
     add_column :credits, :expired_at, :datetime, :default => nil
-    remove_column :exchanges, :is_available
+    # remove_column :exchanges, :is_available
   end
 
   def down
