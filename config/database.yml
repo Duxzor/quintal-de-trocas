@@ -19,11 +19,3 @@ development:
 test:
   <<: *default
   database: db/test.sqlite3
-
-production:
-  adapter: postgresql
-  host: localhost
-  username: quintal-de-trocas
-  database: quintal-de-trocas
-  encoding: utf8
-  pool: 15
