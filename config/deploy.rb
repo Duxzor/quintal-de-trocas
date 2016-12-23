@@ -24,7 +24,8 @@ set :puma_threads, [0, 8]
 set :puma_workers, 0
 set :puma_worker_timeout, nil
 set :puma_init_active_record, true
-set :puma_preload_app, false
+set :puma_preload_app, true
+set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
 
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
