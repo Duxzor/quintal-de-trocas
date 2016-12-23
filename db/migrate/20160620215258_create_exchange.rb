@@ -15,7 +15,6 @@ class CreateExchange < ActiveRecord::Migration
       t.boolean :finalized, default: nil
       t.datetime :finalized_at
       t.boolean :accepted
-      t.boolean :is_available
 
       t.references :user, index: true
 
